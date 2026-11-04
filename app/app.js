@@ -1,21 +1,22 @@
 
 const express = require('express');
 const path = require('path');
+const hbs = require('hbs');
 
 const app = express();
 const PORT = 3000;
-
 
 // Set up the Handlebars template engine
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs');
 
+// Register the Handlebars partials
+hbs.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
 
 // Import the website routes
 const indexRouter = require('./app_server/routes/index');
 
-
- // Register the homepage and travel routes first
+// Register the homepage and travel routes
 app.use('/', indexRouter);
 
 // Serve static files such as CSS, images, and other HTML pages
