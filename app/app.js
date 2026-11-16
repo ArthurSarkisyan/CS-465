@@ -1,5 +1,5 @@
-
 const express = require('express');
+require('./app_api/models/db');
 const path = require('path');
 const hbs = require('hbs');
 
@@ -15,9 +15,11 @@ hbs.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
 
 // Import the website routes
 const indexRouter = require('./app_server/routes/index');
+const apiRouter = require('./app_api/routes/index');
 
 // Register the homepage and travel routes
 app.use('/', indexRouter);
+app.use('/api', apiRouter);
 
 // Serve static files such as CSS, images, and other HTML pages
 app.use(express.static(path.join(__dirname, 'public')));
